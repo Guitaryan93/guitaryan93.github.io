@@ -23,14 +23,13 @@ email: ryanwoodsmusic@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Hello! Im Ryan. Join me on my journey from noob programmer to god tier 
   Senior Developer.
-baseurl: "/" # the subpath of your site, e.g. /blog
-url: "https://guitaryan93.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 
 github_username:  Guitaryan93
 
 # Build settings
-# theme: minima  # default theme
-theme: jekyll-theme-modernist
+theme: minima
 plugins:
   - jekyll-feed
 
