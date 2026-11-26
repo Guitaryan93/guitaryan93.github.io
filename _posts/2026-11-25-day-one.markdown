@@ -1,0 +1,76 @@
+---
+layout: post
+title: "Day One"
+categories: python programming
+---
+The first project that ChatGPT decided upon was a basic expenses tracking application that runs on the command line.
+
+# Requirements
+Here are the requirements for the program as outlined by ChatGPT.
+
+Write a Python program that allows a user to:
+
+1. Enter expenses
+The program should ask the user to enter:
+- An expense description (e.g. Lunch, Gas, Parking).
+- The expense amount (e.g. 15.50).
+
+2. Store expenses
+Each expense should be stored in memory while the program is running.
+
+3. Display expenses
+The program should display all recorded expenses in a reasonably formatted list.
+
+4. Calculate totals
+The program should calculate and display the total amount spent.
+
+5. Exit
+The user should be able to exit the program whenever they want.
+
+Example interaction
+Here's approximately what I'd expect your application to look like:
+```text
+================================
+EMPLOYEE EXPENSE TRACKER
+================================
+
+1. Add expense
+2. View expenses
+3. View total
+4. Exit
+
+Select an option: 1
+
+Expense description: Lunch
+Expense amount: 15.50
+
+Expense added successfully!
+
+1. Add expense
+2. View expenses
+3. View total
+4. Exit
+
+Select an option: 1
+
+Expense description: Gas
+Expense amount: 45.00
+
+Expense added successfully!
+
+Select an option: 2
+
+----------- EXPENSES -----------
+
+Lunch                  $15.50
+Gas                    $45.00
+
+--------------------------------
+Total                  $60.50
+
+Select an option: 4
+
+Goodbye!
+```
+
+# Game Plan
