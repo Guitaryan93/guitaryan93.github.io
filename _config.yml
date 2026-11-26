@@ -30,7 +30,7 @@ github_username:  Guitaryan93
 
 # Build settings
 # theme: minima  # default theme
-theme: modernist
+theme: jekyll-theme-modernist
 plugins:
   - jekyll-feed
 
