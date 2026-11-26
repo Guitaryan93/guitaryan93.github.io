@@ -74,3 +74,32 @@ Goodbye!
 ```
 
 # Game Plan
+Where do you start when tackling a new project? Well, a pro developer would first take a step back from the IDE and come up with a plan. But that's not me (yet!). So I created a new task directory and immediately fired up vim! Yes, I use vim. Please don't feel threatened by my superior text editor... `:lol jk`
+
+To be honest, I have tackled programs like this before in my early days of learning to program and I was keen to dive in headfirst and dust off my Python skills. So I began with a simple printing function to show the program header. Nice!
+```python
+def print_program_header():
+    print("================================")
+    print("EMPLOYEE EXPENSE TRACKER")
+    print("================================")
+```
+
+# Storing Data
+For this project I had to figure out a data structure for storing the expense description and amount. Hmmm... we have 2 connected pieces of data, right? Kind of like a Key, Value relationship wouldn't you say? 💡 Let's use a dictionary! Have the description be the key and the amount as the value. How could this go wrong? Well at first it was fine. But then dictionaries in Python have a really handy feature that totally undermines my simple genius. Python dictionaries do not allow duplicates! (Yes, I am *that* rusty). So my initial data structure worked fine as long as the user didn't try and track multiple of the same expense...
+```python
+# simple, yet naïve 
+expenses = {"Lunch": 15.50, "Dinner": 99.99, "Taxi": 50}
+```
+
+After running into this issue of duplicate entries in a dictionary I realized that I need to revise my data storage structure. So the better way to structure the data is as a list of dictionaries, with descriptive keys in the dictionaries so we know what is being stored in there. Much like a database table and the fields within it, or a JSON object. This structure not only allows for duplicate expenses, it is also easily scalable. For example, if we want to start tracking the employee's name with the expense then we can just add another key to the dictionary for "employee_name".
+```python
+# ahh... much better!
+expenses = [
+    {"description": "Lunch", "amount": 15.50},
+    {"description": "Dinner", "amount": 99.99},
+    {"description": "Taxi", "amount": 50}
+]
+```
+
+# User Input. Ewww...
+To get the expense data we have to let users 
