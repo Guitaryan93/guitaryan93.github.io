@@ -102,4 +102,37 @@ expenses = [
 ```
 
 # User Input. Ewww...
-To get the expense data we have to let users 
+To get the expense data we have to let users type in the description and amount. This never goes well. Users CANNOT be trusted! And the Python `input()` function is wide open to accept anything.
+
+Here's the function for adding an expense. It gets the description and amount from the user.
+```python
+def add_expense(expenses):
+    ''' get description and expense amount from user and add to dict '''
+    print()
+
+    # Description can be alphanumeric, we don't care. It DOES need to be
+    # within 23 characters though, so truncate it
+    desc = input("Expense description: ")[:23]
+
+    amt = input("Expense amount: ")
+
+    # Clean up any punctuation from the input string, e.g. $ , : ' etc...
+    amt = remove_special_chars(amt)
+
+    # Check if remaining string is a number
+    if is_number(amt):
+        expense = {"description": desc, "amount": float(amt)}
+        expenses.append(expense)
+        print("\nExpense added successfully!")
+    else:
+        print("\nERROR: Expense amount not a valid number...")
+        print("Expected format: 9999.99")
+```
+
+# Refining the program menu
+
+
+# Separation of responsibilities
+
+
+# Takeaways
