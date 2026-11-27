@@ -87,10 +87,9 @@ Your application must:
 - Load existing tasks when it starts.
 - Save tasks whenever they are created, completed, or deleted.
 - Create the JSON file if it doesn't already exist.
-- Handle missing or invalid JSON files gracefully.
-We'll use a file called: `tasks.json`
+- Handle missing or invalid JSON files gracefully. We'll use a file called: `tasks.json`
 
-3. Menu requirements
+Menu requirements
 Your menu should contain these options:
 ```
 ================================
