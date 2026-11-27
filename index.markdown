@@ -5,6 +5,7 @@
 layout: home
 title: On the road to Senior Developer...
 ---
+
 Hello! I'm Ryan. A software developer. This website is dedicated to documenting my journey from absolute noob to god tier Senior Developer.
 
 The idea for this site came from a few different sources:
