@@ -5,7 +5,6 @@ categories: python programming
 ---
 Still buzzing with enthusiasm from all the things I learnt from my [first project](/python/programming/2026/11/25/day-one.html) I jumped head first into the next task! This time ChatGPT decided on a persistent task manager application. We will be saving and loading data from JSON files this time around! Very exciting!
 
-<details><summary>Project Requirements</summary>
 Requirement 1 — Add a task
 The user must be able to create a new task.
 
@@ -135,6 +134,4 @@ These are the ground rules for this project.
 6. Handle invalid user input.
 7. Don't silently discard or overwrite existing tasks.
 8. Keep functions focused on individual responsibilities.
-
-</details>
 
