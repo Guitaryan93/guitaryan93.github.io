@@ -128,11 +128,108 @@ def add_expense(expenses):
         print("\nERROR: Expense amount not a valid number...")
         print("Expected format: 9999.99")
 ```
+There is no validation for the description. I have truncated it to 23 characters because that is what fits in the columns for the printing of the expenses, so anything *over* 23 characters would be lost to the user anyways. But, there should be two things added to the description validation to make it more user friendly:
+1. We should not allow a blank description.
+2. The user should get a warning that the description can only be 23 characters long.
+
+The validation for the amount is more involved. Python's `input()` function deals in strings, but we want a float. The first thing I did was cleanup special characters from the input. ChatGPT kept questioning why I did this and argued that the user input should not be cleaned up this way. However, I have many years of experience being and observing humans to know that they would prefer it this way. A human could type a monetary value in many ways:
+- 12.34
+- 1,000.99
+- $55,000
+- £30.98
+
+You *could* frustrate the user by telling them that their formatting is invalid when they type $50.00 instead of 50.00. Or you could take that into consideration and clean up the special characters so that the user doesn't need to concern themselves with $50.00 vs 50.00 vs 5,000$.
+
+```python
+def remove_special_chars(input_string):
+    ''' remove special characters from a string '''
+    special_chars = string.punctuation
+    for char in special_chars:
+        if char != ".":
+            input_string = input_string.replace(char, "")
+
+    return input_string
+```
+
+After the special characters have been cleaned up we need to check that what remains is a float. From reading the documentation I found that `isdigit()` and other methods will return `True` for weird edge cases, like blank strings. So instead we can try forcing a type change with the `float()` method. If that fails then we know that the data is not what we want for our amount.
+
+```python
+def is_number(num):
+    ''' check if a string is a number. built in isdigit and other methods fail
+        for decimal numbers and other numbers '''
+    try:
+        float(num)
+        return True
+    except ValueError:
+        return False
+```
 
 # Refining the program menu
+We have all seen it before! A command line program with a numbered menu. Nothing special, but it does require more user input validation. My first iteration was using if/elif/else statements. This is not ideal, but I thought it would do for this tiny, throwaway project.
 
+```python
+while run_program:
+    print_options(options)
 
-# Separation of responsibilities
+    user_choice = input("Select an option: ")
 
+    if is_number(user_choice) and int(user_choice) > 0 and int(user_choice) <= len(options):
+        choice = int(user_choice)
+        if choice == 1:
+            add_expense(expenses)
+        elif choice == 2:
+            print_expenses(expenses)
+            print_total(expenses)
+        elif choice == 3:
+            print_total(expenses)
+        elif choice == 4:
+            run_program = False
+    else:
+        print(f"\nInvalid option: {user_choice}")
+        print("Please try again...\n")
+```
+Simple, gross, but it works! There has to be a better way though right? Well, that ChatGPT showed me in my code review stage that functions can be stored in dictionaries and called when accessed 🤯
+
+```python
+def main():
+    ''' startup and main program go in here '''
+    # add user options to dictionary inside a list
+    options = [
+        {"name": "Add expense", "func": add_expense},
+        {"name": "View expense", "func": print_all},
+        {"name": "View total", "func": print_total},
+        {"name": "Exit", "func": exit_program}
+    ]
+
+    # Store expenses in list of dictionaries
+    expenses = []
+
+    display.program_header("EMPLOYEE EXPENSE TRACKER")
+
+    while True:
+        display.options(options)
+
+        user_choice = input("Select an option: ")
+
+        try:
+            selected_menu_item = int(user_choice)
+            if selected_menu_item <= 0 or selected_menu_item > len(options):
+                raise ValueError()
+
+        except ValueError:
+            print(f"\nERROR: '{user_choice}' is not a valid option...")
+
+        except IndexError:
+            print(f"\nERROR: '{user_choice}' is not a valid option...")
+
+        else:
+            options[selected_menu_item - 1]["func"](expenses)
+```
+Check *that* out! If you include the parenthesis then the function will run and store the return value in the dictionary. Omit the `()` and you store the function itself and can call it. Very clever and much more scalable/maintainable!
 
 # Takeaways
+ChatGPT kept telling me that my separation of responsibilities into different functions was great. But I kept seeing those `print()` statements everywhere and I know that I should be moving all of them into the separate display.py module I created. The expenses program doesn't need to know what it is outputting to. The display.py functions can handle that. Definitely room for improvement there!
+
+I also kept thinking "there is a better way to do this..." but I am just not well versed enough in Python to know what is possible (yet!). Take the menu for example. I knew there would be a better way to handle that other than all my initial if statements, but didn't know functions could be stored in a dictionary like that. ChatGPT has accelerated my learning there for sure!
+
+On to project number 2 with all my new knowledge.
